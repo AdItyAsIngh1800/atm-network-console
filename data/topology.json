@@ -1,0 +1,547 @@
+{
+ "name": "Commercial Banking & ATM Network",
+ "note": "Template modelled on the Packet Tracer design. Edit nodes/links here to match the real build.",
+ "services": {
+  "primary": "dc_srv",
+  "backup": "dr_srv"
+ },
+ "policy": {
+  "allow": [
+   [
+    "atm",
+    "app"
+   ],
+   [
+    "branch",
+    "app"
+   ],
+   [
+    "app",
+    "db"
+   ],
+   [
+    "mgmt",
+    "*"
+   ]
+  ],
+  "must_deny": [
+   [
+    "atm",
+    "db"
+   ],
+   [
+    "atm",
+    "mgmt"
+   ],
+   [
+    "branch",
+    "db"
+   ],
+   [
+    "branch",
+    "mgmt"
+   ]
+  ]
+ },
+ "nodes": [
+  {
+   "id": "atm1",
+   "label": "ATM Site 1",
+   "role": "source",
+   "zone": "atm",
+   "site": "ATM1",
+   "x": 6,
+   "y": 50,
+   "terminals": 10,
+   "note": "Remote ATM site, 10 ATMs"
+  },
+  {
+   "id": "atm2",
+   "label": "ATM Site 2",
+   "role": "source",
+   "zone": "atm",
+   "site": "ATM2",
+   "x": 6,
+   "y": 36,
+   "terminals": 8,
+   "note": "Remote ATM site, 8 ATMs"
+  },
+  {
+   "id": "br1",
+   "label": "Branch 1",
+   "role": "source",
+   "zone": "branch",
+   "site": "BR1",
+   "x": 6,
+   "y": 22,
+   "terminals": 12,
+   "note": "Branch: tellers and in-branch ATMs"
+  },
+  {
+   "id": "br2",
+   "label": "Branch 2",
+   "role": "source",
+   "zone": "branch",
+   "site": "BR2",
+   "x": 6,
+   "y": 8,
+   "terminals": 10,
+   "note": "Branch: tellers and in-branch ATMs"
+  },
+  {
+   "id": "atm1_r",
+   "label": "ATM-1 Router",
+   "role": "router",
+   "zone": "atm",
+   "site": "ATM1",
+   "x": 24,
+   "y": 50,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "atm2_r",
+   "label": "ATM-2 Router",
+   "role": "router",
+   "zone": "atm",
+   "site": "ATM2",
+   "x": 24,
+   "y": 36,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "br1_r",
+   "label": "Branch 1 Router",
+   "role": "router",
+   "zone": "branch",
+   "site": "BR1",
+   "x": 24,
+   "y": 22,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "br2_r",
+   "label": "Branch 2 Router",
+   "role": "router",
+   "zone": "branch",
+   "site": "BR2",
+   "x": 24,
+   "y": 8,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "isp_a",
+   "label": "ISP-A (primary)",
+   "role": "isp",
+   "zone": "wan",
+   "site": "WAN",
+   "x": 50,
+   "y": 38,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "isp_b",
+   "label": "ISP-B (backup)",
+   "role": "isp",
+   "zone": "wan",
+   "site": "WAN",
+   "x": 50,
+   "y": 14,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dc_r",
+   "label": "DC Edge Router",
+   "role": "router",
+   "zone": "dmz",
+   "site": "DC",
+   "x": 74,
+   "y": 44,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dc_fw",
+   "label": "DC Firewall",
+   "role": "firewall",
+   "zone": "dmz",
+   "site": "DC",
+   "x": 86,
+   "y": 44,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dc_sw",
+   "label": "DC Core Switch",
+   "role": "switch",
+   "zone": "app",
+   "site": "DC",
+   "x": 97,
+   "y": 44,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dc_srv",
+   "label": "Core Banking Servers",
+   "role": "server",
+   "zone": "app",
+   "site": "DC",
+   "x": 108,
+   "y": 44,
+   "terminals": 0,
+   "note": "Transaction authorisation servers"
+  },
+  {
+   "id": "dc_db",
+   "label": "Database Cluster",
+   "role": "server",
+   "zone": "db",
+   "site": "DC",
+   "x": 108,
+   "y": 31,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dc_mgmt",
+   "label": "Management Server",
+   "role": "server",
+   "zone": "mgmt",
+   "site": "DC",
+   "x": 97,
+   "y": 57,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dr_r",
+   "label": "DR Edge Router",
+   "role": "router",
+   "zone": "dmz",
+   "site": "DR",
+   "x": 74,
+   "y": 8,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dr_fw",
+   "label": "DR Firewall",
+   "role": "firewall",
+   "zone": "dmz",
+   "site": "DR",
+   "x": 86,
+   "y": 8,
+   "terminals": 0,
+   "note": ""
+  },
+  {
+   "id": "dr_srv",
+   "label": "DR Servers",
+   "role": "server",
+   "zone": "app",
+   "site": "DR",
+   "x": 100,
+   "y": 8,
+   "terminals": 0,
+   "note": "Warm standby, takes over if the DC is unreachable"
+  }
+ ],
+ "links": [
+  {
+   "id": "atm1~atm1_r",
+   "a": "atm1",
+   "b": "atm1_r",
+   "kind": "lan",
+   "lat_ms": 0.4,
+   "bw_mbps": 100,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Access LAN"
+  },
+  {
+   "id": "atm2~atm2_r",
+   "a": "atm2",
+   "b": "atm2_r",
+   "kind": "lan",
+   "lat_ms": 0.4,
+   "bw_mbps": 100,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Access LAN"
+  },
+  {
+   "id": "br1~br1_r",
+   "a": "br1",
+   "b": "br1_r",
+   "kind": "lan",
+   "lat_ms": 0.4,
+   "bw_mbps": 100,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Access LAN"
+  },
+  {
+   "id": "br2~br2_r",
+   "a": "br2",
+   "b": "br2_r",
+   "kind": "lan",
+   "lat_ms": 0.4,
+   "bw_mbps": 100,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Access LAN"
+  },
+  {
+   "id": "atm1_r~isp_a",
+   "a": "atm1_r",
+   "b": "isp_a",
+   "kind": "wan",
+   "lat_ms": 9,
+   "bw_mbps": 10,
+   "loss_pct": 0.05,
+   "jitter_ms": 1.5,
+   "encrypted": true,
+   "label": "Primary WAN"
+  },
+  {
+   "id": "atm1_r~isp_b",
+   "a": "atm1_r",
+   "b": "isp_b",
+   "kind": "wan",
+   "lat_ms": 15,
+   "bw_mbps": 5.0,
+   "loss_pct": 0.1,
+   "jitter_ms": 2.0,
+   "encrypted": true,
+   "label": "Backup WAN"
+  },
+  {
+   "id": "atm2_r~isp_a",
+   "a": "atm2_r",
+   "b": "isp_a",
+   "kind": "wan",
+   "lat_ms": 11,
+   "bw_mbps": 10,
+   "loss_pct": 0.05,
+   "jitter_ms": 1.5,
+   "encrypted": true,
+   "label": "Primary WAN"
+  },
+  {
+   "id": "atm2_r~isp_b",
+   "a": "atm2_r",
+   "b": "isp_b",
+   "kind": "wan",
+   "lat_ms": 17,
+   "bw_mbps": 5.0,
+   "loss_pct": 0.1,
+   "jitter_ms": 2.0,
+   "encrypted": true,
+   "label": "Backup WAN"
+  },
+  {
+   "id": "br1_r~isp_a",
+   "a": "br1_r",
+   "b": "isp_a",
+   "kind": "wan",
+   "lat_ms": 8,
+   "bw_mbps": 20,
+   "loss_pct": 0.05,
+   "jitter_ms": 1.5,
+   "encrypted": true,
+   "label": "Primary WAN"
+  },
+  {
+   "id": "br1_r~isp_b",
+   "a": "br1_r",
+   "b": "isp_b",
+   "kind": "wan",
+   "lat_ms": 14,
+   "bw_mbps": 10.0,
+   "loss_pct": 0.1,
+   "jitter_ms": 2.0,
+   "encrypted": true,
+   "label": "Backup WAN"
+  },
+  {
+   "id": "br2_r~isp_a",
+   "a": "br2_r",
+   "b": "isp_a",
+   "kind": "wan",
+   "lat_ms": 7,
+   "bw_mbps": 20,
+   "loss_pct": 0.05,
+   "jitter_ms": 1.5,
+   "encrypted": true,
+   "label": "Primary WAN"
+  },
+  {
+   "id": "br2_r~isp_b",
+   "a": "br2_r",
+   "b": "isp_b",
+   "kind": "wan",
+   "lat_ms": 13,
+   "bw_mbps": 10.0,
+   "loss_pct": 0.1,
+   "jitter_ms": 2.0,
+   "encrypted": true,
+   "label": "Backup WAN"
+  },
+  {
+   "id": "dc_r~isp_a",
+   "a": "dc_r",
+   "b": "isp_a",
+   "kind": "wan",
+   "lat_ms": 3,
+   "bw_mbps": 200,
+   "loss_pct": 0.01,
+   "jitter_ms": 0.5,
+   "encrypted": true,
+   "label": "DC uplink (primary)"
+  },
+  {
+   "id": "dc_r~isp_b",
+   "a": "dc_r",
+   "b": "isp_b",
+   "kind": "wan",
+   "lat_ms": 5,
+   "bw_mbps": 100,
+   "loss_pct": 0.02,
+   "jitter_ms": 0.8,
+   "encrypted": true,
+   "label": "DC uplink (backup)"
+  },
+  {
+   "id": "dr_r~isp_a",
+   "a": "dr_r",
+   "b": "isp_a",
+   "kind": "wan",
+   "lat_ms": 6,
+   "bw_mbps": 100,
+   "loss_pct": 0.02,
+   "jitter_ms": 0.8,
+   "encrypted": true,
+   "label": "DR uplink (primary)"
+  },
+  {
+   "id": "dr_r~isp_b",
+   "a": "dr_r",
+   "b": "isp_b",
+   "kind": "wan",
+   "lat_ms": 7,
+   "bw_mbps": 100,
+   "loss_pct": 0.02,
+   "jitter_ms": 0.8,
+   "encrypted": true,
+   "label": "DR uplink (backup)"
+  },
+  {
+   "id": "dc_r~dr_r",
+   "a": "dc_r",
+   "b": "dr_r",
+   "kind": "wan",
+   "lat_ms": 10,
+   "bw_mbps": 100,
+   "loss_pct": 0.01,
+   "jitter_ms": 0.5,
+   "encrypted": true,
+   "label": "DC-DR replication link"
+  },
+  {
+   "id": "dc_r~dc_fw",
+   "a": "dc_r",
+   "b": "dc_fw",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  },
+  {
+   "id": "dc_fw~dc_sw",
+   "a": "dc_fw",
+   "b": "dc_sw",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  },
+  {
+   "id": "dc_sw~dc_srv",
+   "a": "dc_sw",
+   "b": "dc_srv",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  },
+  {
+   "id": "dc_sw~dc_db",
+   "a": "dc_sw",
+   "b": "dc_db",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  },
+  {
+   "id": "dc_sw~dc_mgmt",
+   "a": "dc_sw",
+   "b": "dc_mgmt",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  },
+  {
+   "id": "dr_r~dr_fw",
+   "a": "dr_r",
+   "b": "dr_fw",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  },
+  {
+   "id": "dr_fw~dr_srv",
+   "a": "dr_fw",
+   "b": "dr_srv",
+   "kind": "lan",
+   "lat_ms": 0.15,
+   "bw_mbps": 1000,
+   "loss_pct": 0.0,
+   "jitter_ms": 0.0,
+   "encrypted": false,
+   "label": "Data center LAN"
+  }
+ ]
+}
